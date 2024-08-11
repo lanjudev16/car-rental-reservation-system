@@ -5,5 +5,6 @@ const authValidateSigninSchema=z.object({
         password:z.string()
     })
 })
-
-export default authValidateSigninSchema
+export const authValidate={
+    authValidateSigninSchema
+}
