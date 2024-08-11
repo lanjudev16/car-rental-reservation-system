@@ -30,6 +30,28 @@ const userSchema=new Schema<TUser>({
         type:String,
         required:[true,"Password is required"]
     }
-})
+}
+,
+{
+    timestamps:true,
+    versionKey:false,
+    toJSON: {
+        transform: function (doc, ret) {
+            const reordered = {
+                _id: ret._id,
+                name: ret.name,
+                email: ret.email,
+                phone: ret.phone,
+                address: ret.address,
+                role: ret.role,
+                password: ret.password,
+                createdAt: ret.createdAt,
+                updatedAt: ret.updatedAt,
+            };
+            return reordered;
+        }
+    }
+}
+)
 const userModel=model('userModel',userSchema)
 export default userModel
