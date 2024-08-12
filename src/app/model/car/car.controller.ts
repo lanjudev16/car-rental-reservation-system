@@ -13,6 +13,61 @@ const createCar = catchAsync(async (req: Request, res: Response) => {
         data: result
     })
 })
+const reretrieveCar = catchAsync(async (req: Request, res: Response) => {
+    const result = await carService.reretrieveCar()
+    sendResponse(res, {
+        statusCode: 200,
+        success: true,
+        message: "Cars retrieved successfully",
+        data: result
+    })
+})
+const reretrieveSingleCar = catchAsync(async (req: Request, res: Response) => {
+    const id=req.params.id
+    const result = await carService.reretrieveSingleCar(id)
+    sendResponse(res, {
+        statusCode: 200,
+        success: true,
+        message: "A Car retrieved successfully",
+        data: result
+    })
+})
+const updateCar = catchAsync(async (req: Request, res: Response) => {
+    const id=req.params.id
+    const body=req.body
+    const result = await carService.updateCar(id,body)
+    sendResponse(res, {
+        statusCode: 200,
+        success: true,
+        message: "Car updated successfully",
+        data: result
+    })
+})
+const returnCar = catchAsync(async (req: Request, res: Response) => {
+    const body=req.body
+    const result = await carService.returnCar(body)
+    sendResponse(res, {
+        statusCode: 200,
+        success: true,
+        message: "Car returned successfully",
+        data: result
+    })
+})
+const deleteCar = catchAsync(async (req: Request, res: Response) => {
+    const id=req.params.id
+    const result = await carService.deleteCar(id)
+    sendResponse(res, {
+        statusCode: 200,
+        success: true,
+        message: "Car Deleted successfully",
+        data: result
+    })
+})
 export const carController={
-    createCar
+    createCar,
+    reretrieveCar,
+    reretrieveSingleCar,
+    updateCar,
+    deleteCar,
+    returnCar
 }

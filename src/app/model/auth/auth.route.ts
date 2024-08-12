@@ -6,6 +6,6 @@ import { authValidate } from "./auth.validate";
 
 const router=Router()
 router.post('/signup',validateRequest(userValidateSchema),authController.signupUser)
-router.post('/login',validateRequest(authValidate.authValidateSigninSchema),authController.signinUser)
+router.post('/signin',validateRequest(authValidate.authValidateSigninSchema),authController.signinUser)
 const authRouter=router
 export default authRouter

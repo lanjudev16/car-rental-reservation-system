@@ -22,7 +22,8 @@ const signinUser=async(payLoad:TSign)=>{
     const jwtUserPaylod={
         email:user.email,
         role:user.role,
-        name:user.name
+        name:user.name,
+        id:user._id
     }
     const accessToken=jwt.sign(jwtUserPaylod,config.jwt_access_secret as string,{
         expiresIn:config.jwt_access_expires_in
