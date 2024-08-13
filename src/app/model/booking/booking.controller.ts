@@ -18,10 +18,16 @@ const createBooking = catchAsync(async (req: Request, res: Response) => {
 const retrieveBooking = catchAsync(async (req: Request, res: Response) => {
     const query = req.query
     const result = await bookingService.retrieveBooking(query)
+    let message;
+    if((result.length>0)){
+        message="Bookings retrieved successfully"
+    }else{
+        message="No Data Found"
+    }
     sendResponse(res, {
         statusCode: httpStatus.OK,
         success: true,
-        message: "Bookings retrieved successfully",
+        message:message,
         data: result
     })
 })

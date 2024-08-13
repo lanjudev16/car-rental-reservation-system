@@ -52,7 +52,7 @@ const returnCar=async(payLoad:{bookingId:string,endTime:string})=>{
     const Cost=(endTime-startTime)*costPerHour
     const session=await mongoose.startSession()
     try{
-        session.startTransaction()
+       await session.startTransaction()
         const result=await bookingModel.findByIdAndUpdate(payLoad.bookingId,
             {endTime:payLoad.endTime,totalCost:Cost},
             {
@@ -61,12 +61,12 @@ const returnCar=async(payLoad:{bookingId:string,endTime:string})=>{
                 session
             })
         await carModel.findByIdAndUpdate(carId,{status:"available"},{new:true,runValidators:true,session}) 
-        session.commitTransaction()
-        session.endSession()
+        await session.commitTransaction()
+        await session.endSession()
         return result
     }catch(err:any){
-        session.abortTransaction()
-        session.endSession()
+        await session.abortTransaction()
+        await session.endSession()
         throw new AppError(httpStatus.BAD_REQUEST,"Failed to transaction")
     }
 }

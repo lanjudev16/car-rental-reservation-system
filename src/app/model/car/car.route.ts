@@ -10,8 +10,8 @@ router.post('/',validateRequest(carValidate.carValidateSchema),auth(USER_ROLE.ad
 
 router.get('/',carController.reretrieveCar)
 router.get('/:id',carController.reretrieveSingleCar)
+router.put('/return',auth(USER_ROLE.admin),carController.returnCar)
 router.put('/:id',auth(USER_ROLE.admin),carController.updateCar)
-router.patch('/return',auth(USER_ROLE.admin),carController.returnCar)
 router.delete('/:id',auth(USER_ROLE.admin),carController.deleteCar)
 const carRouter=router
 export default carRouter
